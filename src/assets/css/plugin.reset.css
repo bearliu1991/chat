@@ -1,0 +1,55 @@
+/*.vjs-custom-skin > .video-js .vjs-control-bar .vjs-playback-rate{*/
+  /*display:none;*/
+/*}*/
+.vjs-custom-skin > .video-js .vjs-big-play-button{
+  height:1em !important;
+  width:1em;
+  font-size:2em;
+  line-height:1em !important;
+}
+.video-js .vjs-big-play-button .vjs-icon-placeholder:before, .vjs-button > .vjs-icon-placeholder:before, .video-js .vjs-modal-dialog, .vjs-modal-dialog .vjs-modal-dialog-content{
+  top:-1px;
+  left:-1px;
+}
+/*.video-js .vjs-progress-control .vjs-progress-holder{*/
+  /*margin:0 5px;*/
+/*}*/
+/*.vjs-custom-skin > .video-js .vjs-control{*/
+  /*width:2em;*/
+/*}*/
+/*.video-js .vjs-mute-control{*/
+  /*paddding-left:0;*/
+/*}*/
+.vjs-custom-skin > .video-js .vjs-big-play-button{
+  margin-left:-0.5em;
+  margin-top:-0.5em !important
+}
+.vjs-custom-skin > .video-js .vjs-big-play-button.big{
+  width:3em !important;
+  height:3em !important;
+  line-height:3em !important;
+  font-size:4em
+}
+.vjs-custom-skin > .video-js .vjs-big-play-button.big .vjs-icon-placeholder:before{
+  font-size:2em
+}
+.vjs-custom-skin > .video-js .vjs-big-play-button .vjs-icon-placeholder{
+  font-size:1em
+}
+.vjs-loading-spinner{
+  width:30px;
+  height:30px;
+  margin:-15px 0 0 -15px
+}
+.video-js .vjs-control-bar.big{
+  height:3.0em
+}
+.vjs-control-bar.big .vjs-button > .vjs-icon-placeholder:before{
+  line-height:1.67
+}
+.video-js .vjs-control-bar{
+  height:2.0em
+}
+.vjs-button > .vjs-icon-placeholder:before{
+  line-height:1.2
+}
