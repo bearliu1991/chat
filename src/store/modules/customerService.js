@@ -1,8 +1,8 @@
 /**
  * 客服列表相关状态
  */
-import Common from '@/assets/util/public'
-import Path from '@/assets/util/httpPath'
+import Common from '@/js/public'
+import Path from '@/api/httpPath'
 const state = {
   services: {}, // 所有客服列表
   groups: {} // 所有分组列表

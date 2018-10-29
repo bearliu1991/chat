@@ -2,13 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-
-let Chat = () => import('@/components/chat') /* webpackChunkName: "group-foo" */
-let Login = () => import('@/components/login')
-let Reg = () => import('@/components/register')
-let Manager = () => import('@/components/manager/manager')
-let second = () => import('@/components/second')
-let third = () => import('@/components/third')
+let Chat = () => import('@/pages/chat') /* webpackChunkName: "group-foo" */
+let Login = () => import('@/pages/login')
+let Reg = () => import('@/pages/register')
+let Manager = () => import('@/pages/manager/manager')
+let second = () => import('@/pages/second')
+let third = () => import('@/pages/third')
 
 export default new Router({
   mode: 'history',

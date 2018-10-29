@@ -1,5 +1,5 @@
-import Http from '@/assets/util/public'
-import Path from '@/assets/util/httpPath'
+import Http from '@/js/public'
+import Path from '@/api/httpPath'
 
 const state = {
   loginInfo: null,

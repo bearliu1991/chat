@@ -9,12 +9,12 @@ import store from './store'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import filters from '@/assets/filters'
-import install from '@/assets/util'
+import install from '@/js'
 import VueClipboard from 'vue-clipboard2'
 import VideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import 'vue-video-player/src/custom-theme.css'
-import strPro from '@/assets/util/common'
+import strPro from '@/js/common'
 
 Vue.config.productionTip = false
 Vue.use(VideoPlayer)

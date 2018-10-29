@@ -1,5 +1,5 @@
-import Common from '@/assets/util/public'
-import Path from '@/assets/util/httpPath'
+import Common from '@/js/public'
+import Path from '@/api/httpPath'
 // import { Message } from 'iview'
 
 const state = {
@@ -301,7 +301,7 @@ const actions = {
   setInfo({ commit }, data) {
     if (data.type === 'name') {
       commit('ADD_NAME', data)
-    } else if (data.type === 'mobile') {
+    } else if (data.type === 'phone') {
       commit('ADD_PHONE', data)
     } else {
       commit('ADD_TIPS', data)

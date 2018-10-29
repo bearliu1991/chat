@@ -1,5 +1,5 @@
-import Common from '@/assets/util/public'
-import Path from '@/assets/util/httpPath'
+import Common from '@/js/public'
+import Path from '@/api/httpPath'
 
 const state = {
   allChoosedMarks: {}, // 所有聊天者已选标签集合
