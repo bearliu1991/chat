@@ -6,7 +6,7 @@ let resTimer = null
 let reqCount = false
 let resCount = false
 const service = axios.create({
-  withCredentials: true, // 允许携带cookie
+  // withCredentials: false, // 允许携带cookie
   baseURL: process.env.API_ROOT
 });
 service.interceptors.request.use(

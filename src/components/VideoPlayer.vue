@@ -18,7 +18,7 @@
     </div>
 </template>
 <script>
-import common from '@/js/public'
+import common from '@/utils/public'
 export default {
     name: "index",
     data() {

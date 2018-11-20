@@ -24,26 +24,26 @@ export default {
     },
     watch: {
         '$route' (to, from) {
-            let self = this
-            if (to.matched.some(record => record.meta.requiresAuth)) {
-                self.intercept('http://localhost:8091/csws' + to.path).then(function(res) {
-                    let obj = res.data || {}
-                    // 如果sessionId不存在
-                    if (obj.noExist || !obj.valid) {
-                        console.error('失效或不存在')
-                        self.$router.push({ path: '/login' })
-                        self.$store.commit('public/USER_INFO', null)
-                    }
-                    if (obj.valid) {
-                        console.info('有效')
-                        self.$store.commit('public/USER_INFO', obj.data)
-                        let url = to.path !== '/login' ? to.path : '/index'
-                        self.$router.push({ path: url })
-                    }
-                })
-            } else {
-                self.$router.push({ path: to.path })
-            }
+            // let self = this
+            // if (to.matched.some(record => record.meta.requiresAuth)) {
+            //     self.intercept('http://localhost:8091/csws' + to.path).then(function(res) {
+            //         let obj = res.data || {}
+            //         // 如果sessionId不存在
+            //         if (obj.noExist || !obj.valid) {
+            //             console.error('失效或不存在')
+            //             self.$router.push({ path: '/login' })
+            //             self.$store.commit('public/USER_INFO', null)
+            //         }
+            //         if (obj.valid) {
+            //             console.info('有效')
+            //             self.$store.commit('public/USER_INFO', obj.data)
+            //             let url = to.path !== '/login' ? to.path : '/index'
+            //             self.$router.push({ path: url })
+            //         }
+            //     })
+            // } else {
+            //     self.$router.push({ path: to.path })
+            // }
         }
     },
     created() {
@@ -126,19 +126,18 @@ export default {
         //     }
         // }, 5000)
 
-        // this.$socket.on("chat_msg", data => {
-        //     let res = JSON.parse(data)
-        //     res.hostId = 0
-        //     self.$store.commit('chat/LATEST_MSGS', res, 0)
-        // })
+        this.$socket.on("chat_msg", data => {
+            let res = JSON.parse(data)
+            res.hostId = 0
+            this.$store.commit('chat/LATEST_MSGS', res, 0)
+        })
     },
     mounted() {
-        let self = this;
         this.$socket.on("send_msg", data => {
             let res = JSON.parse(data);
-            if (res.id === self.chatId) {
+            if (res.id === this.chatId) {
                 let datas = {}
-                datas.id = self.chatId
+                datas.id = this.chatId
                 datas.item = {
                     name: "张三",
                     infoType: 0,
@@ -148,7 +147,7 @@ export default {
                     info: res.msg,
                     type: 0
                 }
-                self.$store.commit('chat/INSERT_MSGS', datas)
+                this.$store.commit('chat/INSERT_MSGS', datas)
             }
         })
     },

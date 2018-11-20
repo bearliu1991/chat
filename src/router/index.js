@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Config from "../config";
 
 Vue.use(Router)
 let Chat = () => import('@/pages/chat') /* webpackChunkName: "group-foo" */
@@ -8,10 +9,12 @@ let Reg = () => import('@/pages/register')
 let Manager = () => import('@/pages/manager/manager')
 let second = () => import('@/pages/second')
 let third = () => import('@/pages/third')
-
+let Update = () => import('@/update')
+let baseUrl = !Config.isDesktop ? 'csws' : process.env.NODE_ENV === "development" ? '' : Config.absUrl
+let mode = Config.isDesktop ? 'hash' : 'history'
 export default new Router({
-  mode: 'history',
-  base: 'csws',
+  mode: mode,
+  base: baseUrl,
   routes: [
     {
       path: '/login',
@@ -46,12 +49,13 @@ export default new Router({
       ]
     },
     {
-      path: '/',
+      path: '*',
       redirect: '/login'
     },
     {
-      path: '*',
-      redirect: '/login'
+      path: '/', 
+      name: 'indexPage', 
+      component: Update
     }
   ]
 })

@@ -26,7 +26,7 @@
     data() {
       return {
         idx: 0,
-        pathObj : {'/manager': '&#xe7a8;', '/manager/second': '&#xe67c;', '/manager/third': '&#xe62f;'}
+        pathObj : {'/manager': '&#xe7a8;', '/manager/second': '&#xe67c;'}
       }
     },
     created() {

@@ -1,5 +1,6 @@
-import Common from '@/js/public'
-import Path from '@/api/httpPath'
+import Common from '@/utils/public'
+import Path from '@/api/chatPath'
+import Service from '@/api/service'
 
 const state = {
   files: {},
@@ -41,8 +42,8 @@ const mutations = {
 const actions = {
   ajaxFiles({commit, state}, idx) {
       if (!state.files[idx]) {
-          Common.httpPost(Path.files, {id: idx}).then((res) => {
-              let data = res.data
+        Service.httpPost(Path.files, {id: idx}).then((res) => {
+              let data = res
               if (data.code === 1) {
                 commit('FILES', {res: data.data, idx})
               }
@@ -51,8 +52,8 @@ const actions = {
   },
   ajaxModels({commit, state}, idx) {
     if (!state.models.length || idx) {
-      Common.httpPost(Path.models).then((res) => {
-          let data = res.data
+      Service.httpPost(Path.models).then((res) => {
+          let data = res
           if (data.code === 1) {
             let arr = []
             for (let val of data.data) {

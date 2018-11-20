@@ -1,5 +1,5 @@
-import Common from '@/js/public'
-import Path from '@/api/httpPath'
+import Path from '@/api/chatPath'
+import Service from '@/api/service'
 
 const state = {
   emotions: [],
@@ -20,10 +20,10 @@ const mutations = {
 }
 const actions = {
     ajaxEmotions({commit}, idx) {
-      Common.httpPost(Path.emotions, {id: idx}).then((res) => {
-        let data = res.data
+      Service.httpPost(Path.emotions, {id: idx}).then((res) => {
+        let data = res
         if (data.code === 1) {
-            commit('EMOTIONS', {res: data.data, idx})
+          commit('EMOTIONS', {res: data.data, idx})
         }
       })
     }

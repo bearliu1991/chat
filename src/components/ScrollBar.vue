@@ -79,12 +79,14 @@ export default {
       this.$nextTick(() => {
         self.calcHeight()
         self.preHeight = self.preHeight || self.con.clientHeight 
-        if (self.con.clientHeight - self.preHeight > 0) {
-          self.pulling && self.setPosition(self.con.clientHeight, self.preHeight)
+        if (self.con) {
+          if (self.con.clientHeight - self.preHeight > 0) {
+            self.pulling && self.setPosition(self.con.clientHeight, self.preHeight)
+          }
+          self.isBottom && self.setBottom()
+          self.isTop && self.setTop()
         }
-        self.isBottom && self.setBottom()
-        self.isTop && self.setTop()
-      });
+      })
     }
   },
   mounted() {
@@ -290,26 +292,28 @@ export default {
         // console.error(this.con.clientHeight)
         // console.error(this.con.style.top)
         // console.error(this.out.clientHeight)
-        if (self.con.clientHeight + parseFloat(self.con.style.top) < self.out.clientHeight) {
-          if (self.con.clientHeight > self.out.clientHeight) {
-            self.con.style.top = self.out.clientHeight - self.con.clientHeight + 'px'
-          } else {
-            self.con.style.top = 0
+        if (self.con) {
+          if (self.con.clientHeight + parseFloat(self.con.style.top) < self.out.clientHeight) {
+            if (self.con.clientHeight > self.out.clientHeight) {
+              self.con.style.top = self.out.clientHeight - self.con.clientHeight + 'px'
+            } else {
+              self.con.style.top = 0
+            }
           }
-        }
-        self.drag.style.height =
-          self.out.clientHeight /
-            self.con.clientHeight *
-            self.box.clientHeight +
-          "px";
-        if (self.out.clientHeight - self.con.clientHeight >= 0) {
-          self.box.style.display = 'none';
-        }
-        if (self.maxHeight > 0) {
-          if (self.con.clientHeight <= self.maxHeight) {
-            self.out.style.height = self.con.clientHeight + "px";
-          } else {
-            self.out.style.height = self.maxHeight + "px";
+          self.drag.style.height =
+            self.out.clientHeight /
+              self.con.clientHeight *
+              self.box.clientHeight +
+            "px";
+          if (self.out.clientHeight - self.con.clientHeight >= 0) {
+            self.box.style.display = 'none';
+          }
+          if (self.maxHeight > 0) {
+            if (self.con.clientHeight <= self.maxHeight) {
+              self.out.style.height = self.con.clientHeight + "px";
+            } else {
+              self.out.style.height = self.maxHeight + "px";
+            }
           }
         }
       })

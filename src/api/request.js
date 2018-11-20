@@ -1,41 +1,44 @@
-import Path from './httpPath'
-import qs from 'qs'
+import publicPath from './publicPath'
+import chatPath from './chatPath'
 import Vue from 'vue'
-import Http from '@/js/public'
+import Service from '@/api/service'
 
 export default function () {
-  Vue.prototype.Path = Path;
+  Vue.prototype.publicPath = publicPath
+  Vue.prototype.chatPath = chatPath
+  Vue.prototype.$get = Service.httpGet
+  Vue.prototype.$post = Service.httpPost
   Vue.prototype.intercept = function (url, args) {
-    return Http.httpPost(url, args)
+    return Service.httpPost(url, args)
   }
   Vue.prototype.login = function (args) {
-    return Http.httpPost(Path.login, qs.stringify(args))
+    return Service.httpPost(publicPath.login, args)
   }
   Vue.prototype.register = function (args) {
-    return Http.httpPost(Path.register, qs.stringify(args))
+    return Service.httpPost(publicPath.register, args)
   }
   Vue.prototype.logout = function (args) {
-    return Http.httpPost(Path.logout)
-  }
-  Vue.prototype.getRoutes = function (args) {
-    return Http.httpPost(Path.routeMap)
-  }
-  Vue.prototype.searchUser = function (args) {
-    return Http.httpPost(Path.searchUser)
-  }
-  Vue.prototype.auth = function (args) {
-    return Http.httpPost(Path.auth, qs.stringify(args))
-  }
-  Vue.prototype.chatDetail = function (args) {
-    return Http.httpPost(Path.msgRecord, qs.stringify(args))
-  }
-  Vue.prototype.scrollMore = function (args) {
-    return Http.httpPost(Path.scrollMore, qs.stringify(args))
-  }
-  Vue.prototype.submitModelData = function (args) {
-    return Http.httpPost(Path.modelData, qs.stringify(args))
+    return Service.httpPost(publicPath.logout)
   }
   Vue.prototype.upload = function (args) {
-    return Http.httpPost(Path.upload, args, { 'Content-Type': 'multipart/form-data' })
+    return Service.httpPost(publicPath.upload, args, { 'Content-Type': 'multipart/form-data' })
+  }
+  Vue.prototype.getRoutes = function (args) {
+    return Service.httpPost(publicPath.routeMap)
+  }
+  Vue.prototype.auth = function (args) {
+    return Service.httpPost(publicPath.auth, args)
+  }
+  Vue.prototype.searchUser = function (args) {
+    return Service.httpPost(chatPath.searchUser)
+  }
+  Vue.prototype.chatDetail = function (args) {
+    return Service.httpPost(chatPath.msgRecord, args)
+  }
+  Vue.prototype.scrollMore = function (args) {
+    return Service.httpPost(chatPath.scrollMore, args)
+  }
+  Vue.prototype.submitModelData = function (args) {
+    return Service.httpPost(chatPath.modelData, args)
   }
 }

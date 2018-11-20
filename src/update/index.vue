@@ -47,16 +47,16 @@
         if (!this.logining) {
           this.logining = true
           let res = await this.login({username : this.username, psw : this.psw, platformType: "PC_WEB_CHAT"})
-          if (res.code === 1) {
+          let obj = res.data || {}
+          if (obj.code === 1) {
             this.logining = false
-            this.$router.push('/manager')
-            this.Config.isDesktop && this.$root.Bus.$emit('loginSuccess')
             // this.$store.dispatch('public/getRouteMap')
+            this.$router.push('/manager')
           }
         }
         setTimeout(() => {
             this.logining = false
-        }, 5000)
+        }, 5000);
       }
     },
     components: {}

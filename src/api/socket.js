@@ -1,7 +1,7 @@
 import _io from 'socket.io-client'
 let socket
 let lockReconnect = false // 避免重复连接
-let socketUrl = 'http://localhost:8091'
+let socketUrl = process.env.API_ROOT
 
 function createSocket(url) {
     try {

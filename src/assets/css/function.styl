@@ -173,3 +173,48 @@ resetScrollBar()
     background-color: #F5F5F5
   &::-webkit-scrollbar-thumb
     background-color: #C1C1C1
+block()
+  display:block
+bold()
+  font-weight: bold
+flex_()
+  display:flex
+hover_bgclolr()
+  background-color: rgb(241, 241, 241)
+resetScrollBar()
+  &::-webkit-scrollbar-track
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+    background-color: #F5F5F5
+  &::-webkit-scrollbar
+    width: 6px
+    background-color: #F5F5F5
+  &::-webkit-scrollbar-thumb
+    background-color: #C1C1C1
+border_()
+  border:1px solid #ddd
+bort(n = 1px solid #ddd)
+  border-top:n
+borr(n = 1px solid #ddd)
+  border-right:n
+borl(n = 1px solid #ddd)
+  border-left:n
+borb(n = 1px solid #ddd)
+  border-bottom:n
+weight()
+  font-weight:bold
+topLeftTriangle(n, colors)
+  width:0
+  height:0
+  border-width:n n 0 0
+  border-style:solid
+  border-top-color:colors
+  border-right-color:transparent
+topRightTriangle(n, colors)
+  width:0
+  height:0
+  border-width:n 0 0 n
+  border-style:solid
+  border-top-color:colors
+  border-left-color:transparent
+normal()
+  font-weight:normal

@@ -89,7 +89,7 @@ export default {
       }
       if (pageId) {
         this.chatDetail({ id: this.dataId, pageId: pageId }).then(function(res) {
-          let data = res.data
+          let data = res
           if (data.code === 1) {
             let noresult = data.length < 7
             self.$store.commit("chat/ADD_MSG", {
@@ -103,7 +103,7 @@ export default {
       } else {
         if (!this.allMsg[this.dataId]) {
           this.chatDetail({ id: this.dataId }).then(function(res) {
-            let data = res.data
+            let data = res
             if (data.code === 1) {
               self.$store.commit("chat/ADD_MSG", {
                 id: self.dataId,

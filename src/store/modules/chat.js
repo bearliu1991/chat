@@ -1,5 +1,6 @@
-import Common from '@/js/public'
-import Path from '@/api/httpPath'
+import Common from '@/utils/public'
+import Service from '@/api/service'
+import Path from '@/api/chatPath'
 // import { Message } from 'iview'
 
 const state = {
@@ -24,8 +25,7 @@ const state = {
 
 const getters = {
   reorder (state, index) {
-    let item = state.contactRecord.slice(index, 1)
-    return state.contactRecord.unshift(item)
+    
   },
   getChatId(state, index) {
     return state.chatId
@@ -33,6 +33,10 @@ const getters = {
 }
 
 const mutations = {
+  CHANGE_CONTACT_RECORD(state, index) {
+    let item = state.contactRecord.slice(index, 1)
+    return state.contactRecord.unshift(item)
+  },
   SET_TOP(state, data) {
     state.allChator = data
   },
@@ -322,10 +326,9 @@ const actions = {
   ajaxUserPortrait({commit}, id) {
     if (id !== undefined) {
       if (!state.allChator[id].publicCode) {
-        Common.httpPost(Path.userDetail, {id: id}).then((res) => {
-          let data = res.data
-          if (data.code === 1) {
-            commit('USER_DETAIL', data.data)
+        Service.httpPost(Path.userDetails, {id: id}).then((res) => {
+          if (res.code === 1) {
+            commit('USER_DETAIL', res.data)
           }
         })
       }
@@ -334,7 +337,7 @@ const actions = {
   ajaxUserDetail({commit}, id) {
     if (id !== undefined) {
       if (!state.allChator[id].publicCode) {
-        Common.httpPost(Path.userDetail, {id: id}).then((res) => {
+        Service.httpPost(Path.userDetails, {id: id}).then((res) => {
           let data = res.data
           if (data.code === 1) {
             commit('USER_DETAIL', data.data)
@@ -345,9 +348,8 @@ const actions = {
   },
   deleteMsg({commit}, {id, msgId}) {
     if (id !== undefined) {
-      Common.httpPost(Path.deleteMsg, {id: msgId}).then((res) => {
-        let data = res.data
-        if (data.code === 1) {
+      Service.httpPost(Path.deleteMsg, {id: msgId}).then((res) => {
+        if (res.code === 1) {
           commit('DELETE_MSG', {id, msgId})
         }
       })
@@ -355,58 +357,55 @@ const actions = {
   },
   delContact({commit}, {idx}) {
     if (idx !== undefined) {
-      Common.httpPost(Path.delContact, {idx}).then((res) => {
-        let data = res.data
-        if (data.code === 1) {
+      Service.httpPost(Path.delContact, {idx}).then((res) => {
+        if (res.code === 1) {
           commit('DELETE_CONTACT', idx)
         }
       })
     }
   },
   transText({commit}, param) {
-    Common.httpPost(Path.transText).then((res) => {
-      let data = res.data
-      if (data.code === 1) {
+    Service.httpPost(Path.transText).then((res) => {
+      if (res.code === 1) {
         commit('TRANS_TEXT', param)
       }
     })
   },
   translate({commit}, param) {
-    Common.httpPost(Path.translate).then((res) => {
-      let data = res.data
-      if (data.code === 1) {
+    Service.httpPost(Path.translate).then((res) => {
+      if (res.code === 1) {
         commit('TRANSLATE', param)
       }
     })
   },
   getAudios({ commit }) {
-    Common.httpGet(Path.audios).then((res) => {
+    Service.httpGet(Path.audios).then((res) => {
       commit('AUDIOS', res.data)
     })
   },
   getVideos({ commit }) {
-    Common.httpGet(Path.videos).then((res) => {
+    Service.httpGet(Path.videos).then((res) => {
       commit('VIDEOS', res.data)
     })
   },
   getRecords ({ commit }) {
-    Common.httpGet(Path.contactRecord).then((res) => {
-      commit('CONTACT_RECORD', res.data.data)
+    Service.httpGet(Path.contactRecord).then((res) => {
+      commit('CONTACT_RECORD', res.data)
     })
   },
   reorder ({commit, state}, id) {
     let copy = Common.deepCopy(state.allChator)
     let time = Date.now()
     if (copy[id].isTop) {
-      Common.httpPost(Path.cancelReorder).then((res) => {
-        let obj = res.data
+      Service.httpPost(Path.cancelReorder).then((res) => {
+        let obj = res
         if (obj.code === 1) {
           copy[id].isTop = null
           commit('SET_TOP', copy)
         }
       })
     } else {
-      Common.httpPost(Path.reorder).then((res) => {
+      Service.httpPost(Path.reorder).then((res) => {
         let obj = res.data
         if (obj.code === 1) {
           copy[id].isTop = true
@@ -417,12 +416,12 @@ const actions = {
     }
   },
   chaterInfo({commit}) {
-    Common.httpPost(Path.msgPortrait).then((res) => {
+    Service.httpPost(Path.msgPortrait).then((res) => {
       commit('CHATER_INFO', res.data)
     })
   },
   getSearchTypes({commit}) {
-    Common.httpGet(Path.searchTypes).then((res) => {
+    Service.httpGet(Path.searchTypes).then((res) => {
       let data = res.data
       data.code === 1 && commit('SEARCH_TYPE', data.data)
     })

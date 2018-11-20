@@ -1,8 +1,9 @@
 /**
  * 客服列表相关状态
  */
-import Common from '@/js/public'
-import Path from '@/api/httpPath'
+import Path from '@/api/chatPath'
+import Service from '@/api/service'
+
 const state = {
   services: {}, // 所有客服列表
   groups: {} // 所有分组列表
@@ -25,7 +26,7 @@ const actions = {
   ajaxServices({commit}, id) {
     if (id !== undefined) {
       if (!Object.keys(state.services).length) {
-        Common.httpPost(Path.services, {id: id}).then((res) => {
+        Service.httpPost(Path.services, {id: id}).then((res) => {
           let data = res.data
           if (data.code === 1) {
             commit('SERVICES', data.data)
@@ -37,7 +38,7 @@ const actions = {
   ajaxGroups({commit}, id) {
     if (id !== undefined) {
       if (!Object.keys(state.groups).length) {
-        Common.httpPost(Path.groups, {id: id}).then((res) => {
+        Service.httpPost(Path.groups, {id: id}).then((res) => {
           let data = res.data
           if (data.code === 1) {
             commit('GROUPS', data.data)

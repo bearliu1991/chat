@@ -1,5 +1,6 @@
-import Common from '@/js/public'
-import Path from '@/api/httpPath'
+import Common from '@/utils/public'
+import Path from '@/api/chatPath'
+import Service from '@/api/service'
 
 const state = {
   allChoosedMarks: {}, // 所有聊天者已选标签集合
@@ -27,8 +28,8 @@ const mutations = {
 
 const actions = {
   ajaxAllMarks({ commit }) {
-    Common.httpPost(Path.allMarks).then((res) => {
-      let obj = res.data
+    Service.httpPost(Path.allMarks).then((res) => {
+      let obj = res
       if (obj.code === 1) {
         commit('ALL_MARKS', obj.data)
       }
@@ -37,8 +38,8 @@ const actions = {
   ajaxChoosedMarks({ commit }, id) {
     let temp = Common.deepCopy(state.allChoosedMarks)
     if (!temp[id]) {
-      Common.httpPost(Path.choosedMarks, {id: id}).then((res) => {
-        let obj = res.data
+      Service.httpPost(Path.choosedMarks, {id: id}).then((res) => {
+        let obj = res
         if (obj.code === 1) {
           temp[id] = obj.data
           commit('ALL_CHOOSED_MARKS', temp)
@@ -47,8 +48,8 @@ const actions = {
     }
   },
   setMarks({ commit }, data) {
-    Common.httpPost(Path.setMarks, {idArr: data.idArr}).then((res) => {
-      let obj = res.data
+    Service.httpPost(Path.setMarks, {idArr: data.idArr}).then((res) => {
+      let obj = res
       if (obj.code === 1) {
         let temp = Common.deepCopy(state.allChoosedMarks)
         temp[data.id] = data.activeArr

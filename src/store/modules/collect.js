@@ -1,5 +1,6 @@
-import Common from '@/js/public'
-import Path from '@/api/httpPath'
+import Common from '@/utils/public'
+import Path from '@/api/chatPath'
+import Service from '@/api/service'
 
 const state = {
   collectList: []
@@ -17,8 +18,8 @@ const mutations = {
 
 const actions = {
   getStore({commit}, id) {
-    Common.httpPost(Path.getStore, {id: id}).then((res) => {
-      let data = res.data
+    Service.httpPost(Path.getStore, {id: id}).then((res) => {
+      let data = res
       if (data.code === 1) {
         commit('STORE', data.data)
       }
@@ -26,8 +27,8 @@ const actions = {
   },
   selectCollect({commit, state}, {index, item}) {
     let collcetList = Common.deepCopy(state.collectList)
-    Common.httpPost(Path.addStoreMsg, item).then((res) => {
-      if (res.data.code === 1) {
+    Service.httpPost(Path.addStoreMsg, item).then((res) => {
+      if (res.code === 1) {
         collcetList[index].msgs.push(item)
         commit('STORE', collcetList)
       }
@@ -36,8 +37,8 @@ const actions = {
   addStoreGroup({commit, state}, item) {
     let collcetList = state.collectList.slice()
     let obj = {name:item, msgs:{}}
-    Common.httpPost(Path.addStoreGroup, item).then((res) => {
-      if (res.data.code === 1) {
+    Service.httpPost(Path.addStoreGroup, item).then((res) => {
+      if (res.code === 1) {
         collcetList.push(obj)
         commit('STORE', collcetList)
       } else {
@@ -47,7 +48,7 @@ const actions = {
   },
   delStoreGroup({commit, state}, idx) {
     let collcetList = state.collectList.slice()
-    Common.httpPost(Path.addStoreGroup, idx).then((res) => {
+    Service.httpPost(Path.addStoreGroup, idx).then((res) => {
       if (res.data.code === 1) {
         collcetList.splice(idx, 1)
         commit('STORE', collcetList)
@@ -56,7 +57,7 @@ const actions = {
   },
   delStoreMsg({commit, state}, data) {
     let collcetList = Common.deepCopy(state.collectList)
-    Common.httpPost(Path.delStoreMsg, data.id).then((res) => {
+    Service.httpPost(Path.delStoreMsg, data.id).then((res) => {
       if (res.data.code === 1) {
         collcetList[data.arrId].msgs.splice(data.idx, 1)
         commit('STORE', collcetList)

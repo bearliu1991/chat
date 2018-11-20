@@ -1,5 +1,5 @@
-import Http from '@/js/public'
-import Path from '@/api/httpPath'
+import Path from '@/api/chatPath'
+import Service from '@/api/service'
 
 const state = {
   loginInfo: null,
@@ -35,19 +35,19 @@ const mutations = {
 
 const actions = {
   getRouteMap({commit}) {
-    Http.httpGet(Path.routeMap).then((res) => {
+    Service.httpGet(Path.routeMap).then((res) => {
       // let data = res.data.data
       // commit('ROUTE_MAP', data)
     })
   },
   getUserInfo({commit}) {
-    Http.httpGet(Path.userInfo).then((res) => {
+    Service.httpGet(Path.userInfo).then((res) => {
       let data = res.data.data
       commit('USER_INFO', data)
     })
   },
   getUserPortrait({commit}) {
-    Http.httpGet(Path.userInfo).then((res) => {
+    Service.httpGet(Path.userInfo).then((res) => {
       let data = res.data.data
       commit('PORTRAIT_DATA', data)
     })
